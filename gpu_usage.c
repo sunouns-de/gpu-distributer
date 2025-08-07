@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <nvml.h>
 
+nvmlDevice_t device;
+
 int init_device(int device_num){
     nvmlReturn_t result;
     unsigned int device_count, i;
@@ -15,12 +17,24 @@ int init_device(int device_num){
     if (result != NVML_SUCCESS) {
         printf("Failed to get device count: %s\n", nvmlErrorString(result));
         nvmlShutdown();
-        return 1;
+        return 2;
     }
 
     if (device_count < device_num){
-        return -1;
+        return 3;
     }
+
+    result = nvmlDeviceGetHandleByIndex(i, &device);
+    if (result != NVML_SUCCESS) {
+        printf("Failed to get device count: %s\n", nvmlErrorString(result));
+        nvmlShutdown();
+        return 4;
+    }
+        
+    char name[96];
+    nvmlDeviceGetName(device, name, sizeof(name));
+    printf("successfully initialized Device %s\n", name);
+
     return 0;
 }
 
