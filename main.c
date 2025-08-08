@@ -12,7 +12,7 @@ int main(int argc, char const *argv[])
 
     for (size_t i = 0; i < 120; i++)
     {
-        printf("gpu utilization: %d", gpu_get_utilization());
+        printf("gpu utilization: %d\n", gpu_get_utilization());
         sleep(1);
     }
     
