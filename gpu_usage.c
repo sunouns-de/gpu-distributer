@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <nvml.h>
 
+#include "gpu_usage.h"
+
 nvmlDevice_t device;
 
-int init_device(int device_num){
+int gpu_init(int device_num){
     nvmlReturn_t result;
     unsigned int device_count, i;
 
@@ -36,6 +38,15 @@ int init_device(int device_num){
     printf("successfully initialized Device %s\n", name);
 
     return 0;
+}
+
+int gpu_get_utilization(){
+    nvmlUtilization_t utilization;
+    nvmlReturn_t result = nvmlDeviceGetUtilizationRates(device, &utilization);
+    if(result != NVML_SUCCESS){
+        return -1;
+    }
+    return (int) utilization.gpu;
 }
 
 int main() {
