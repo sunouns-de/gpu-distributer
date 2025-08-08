@@ -1,7 +1,6 @@
 services:
   gpu_checker:
     build: .
-    runtime: nvidia
     deploy:
       resources:
         reservations:
