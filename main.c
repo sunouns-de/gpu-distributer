@@ -12,7 +12,8 @@ int main(int argc, char const *argv[])
 
     for (size_t i = 0; i < 120; i++)
     {
-        printf("gpu utilization: %d\n", gpu_get_utilization());
+        fprintf(stdout, "gpu utilization: %d\n", gpu_get_utilization());
+        fflush(stdout);
         sleep(1);
     }
     
