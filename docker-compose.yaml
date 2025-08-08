@@ -1,0 +1,10 @@
+services:
+  gpu_checker:
+    build: .
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    container_name: gpu-usage-checker
